@@ -14,7 +14,6 @@ const Place = connection.define('places',{
   },
   telefone: {
     type: Sequelize.STRING,
-    allowNull: false
   },
   opening_hours: {
     type: Sequelize.STRING,
@@ -22,7 +21,6 @@ const Place = connection.define('places',{
   },
   description: {
     type: Sequelize.STRING,
-    allowNull: false,
   },
   latitude: {
     type: Sequelize.FLOAT,
