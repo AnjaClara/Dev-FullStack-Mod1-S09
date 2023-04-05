@@ -82,7 +82,7 @@ app.put('/places/:id', async (request, response) => {
   try {
     const place = await Place.findByPk(id);
 
-    if (place === null) {
+    if (!place) {
       return response.status(404).json({ message: 'Local não encontrado' });
     }
 
