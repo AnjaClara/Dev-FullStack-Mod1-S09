@@ -1,10 +1,15 @@
+const { request } = require('express');
 const express = require('express');
+
 const connection = require('./src/database');
+
 const Place = require('./src/models/place');
+const User = require('./src/models/user')
+
 const app = express();
 
 app.use(express.json())
-// //EX1-3
+// //EX1-3S09
 // const places = [];
 
 connection.authenticate();
@@ -16,7 +21,7 @@ app.get('/', (request, response) => {
   response.json({mensagem: "Olá!"})
 })
 
-//EX4
+//EX4S09
 app.get('/places', async(request, response)=>{
 
   try{
@@ -29,7 +34,7 @@ app.get('/places', async(request, response)=>{
   
 });
 
-// //EX1-3
+// //EX1-3 S09
 // app.post('/places', (request, response)=>{
 //   console.log(places)
 //   const place = {
@@ -44,7 +49,7 @@ app.get('/places', async(request, response)=>{
 //   response.status(201).json(place); 
 // });
 
-//EX4
+//EX4S09
 app.post('/places', async(request, response)=>{
   try{
     const place = {
@@ -76,6 +81,7 @@ app.post('/places', async(request, response)=>{
   }
 });
 
+//EX6S09
 app.put('/places/:id', async (request, response) => {
   const id = request.params.id;
 
@@ -105,6 +111,19 @@ app.put('/places/:id', async (request, response) => {
   }
 });
 
+//EX1e2S10
+app.post('/users', async (request, response)=>{
+  try {
+    const { name, email, username, password } = request.body;
+    const user = await User.create({ name, email, username, password });
+    return response.status(201).json(user);
+  } catch (err) {
+    console.error(err);
+    return response.status(400).json({ message: 'Erro ao criar usuário' });
+  }
+})
+
+//EX5S09
 app.delete('/places/:id', async(request, response)=>{
   console.log(request.params);
 
